@@ -19,7 +19,6 @@ export default function NavBar() {
           <>
             <Link to="/resources">Resources</Link>
             <Link to="/bookings">Bookings</Link>
-            <Link to="/availability">Availability</Link>
             {isAdmin && <Link to="/admin/users">Users</Link>}
             <span className="role-tag">{role}</span>
             <button className="btn btn-secondary" onClick={handleLogout}>Logout</button>

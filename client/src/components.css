@@ -30,3 +30,7 @@
 .slot-actions { display: flex; gap: 8px; }
 .success { background: #e6f4ea; color: #137333; padding: 10px 14px; border-radius: 8px; }
 .badge-neutral { background: var(--code-bg); color: var(--text-h); }
+
+.table { width: 100%; border-collapse: collapse; }
+.table th, .table td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; }
+.table select { padding: 6px 8px; border: 1px solid var(--border); border-radius: 6px; font: inherit; }

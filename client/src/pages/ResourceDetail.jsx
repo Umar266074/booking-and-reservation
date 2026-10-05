@@ -16,7 +16,7 @@ export default function ResourceDetail() {
   const { items: slots, loading: slotsLoading, create: addSlot, remove: removeSlot } =
     useAvailability({ resourceId: id });
   const { create: createBooking } = useBookings({ autoFetch: false });
-  const { canManageResources } = useAuth();
+  const { canEditResource } = useAuth();
 
   const [editing, setEditing] = useState(false);
   const [bookingSlot, setBookingSlot] = useState(null);
@@ -52,6 +52,7 @@ export default function ResourceDetail() {
   if (!selected) return null;
 
   const isActive = Boolean(selected.is_active);
+  const canEdit = canEditResource(selected);     // admin ya is resource ka owner provider
 
   return (
     <div className="page">
@@ -67,7 +68,7 @@ export default function ResourceDetail() {
             Capacity: {selected.capacity} · Duration: {selected.duration_minutes} min ·{" "}
             {isActive ? "Active" : "Inactive"}
           </p>
-          {canManageResources && <Button onClick={() => setEditing(true)}>Edit</Button>}
+          {canEdit && <Button onClick={() => setEditing(true)}>Edit</Button>}
         </div>
       )}
 
@@ -80,13 +81,13 @@ export default function ResourceDetail() {
 
         <AvailabilitySlots
           slots={slots}
-          canBook={isActive && !canManageResources}
-          canManage={canManageResources}
+          canBook={isActive}                 // customer, provider aur admin sab khud ke liye book kar sakte hain
+          canManage={canEdit}
           onBook={(slot) => { setSuccess(""); setBookingSlot(slot); }}
           onDelete={handleDeleteSlot}
         />
 
-        {!isActive && !canManageResources && <p className="meta">This Resource is in-active, booking is closed.</p>}
+        {!isActive && !canEdit && <p className="meta">This Resource is in-active, booking is closed.</p>}
 
         {bookingSlot && (
           <BookingForm
@@ -97,7 +98,7 @@ export default function ResourceDetail() {
           />
         )}
 
-        {canManageResources && <AvailabilityForm resourceId={id} onSubmit={addSlot} />}
+        {canEdit && <AvailabilityForm resourceId={id} onSubmit={addSlot} />}
       </section>
     </div>
   );

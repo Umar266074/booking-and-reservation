@@ -5,10 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "test": "jest --detectOpenHandles --forceExit"
+    "test": "jest --runInBand --forceExit"
   },
   "jest": {
-    "setupFiles": ["./test/setup.js"]
+    "setupFiles": [
+      "./test/setup.js"
+    ]
   },
   "keywords": [],
   "author": "",

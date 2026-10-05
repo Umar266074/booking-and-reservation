@@ -22,7 +22,7 @@ export default function Login() {
     setLoading(true);
     try {
       const data = await loginService({ email, password });
-      dispatch(setCredentials({ token: data.token, role: data.user.role }));
+      dispatch(setCredentials({ token: data.token, role: data.user.role, userId: data.user.id }));
       navigate("/resources");
     } catch (err) {
       setError(getError(err));

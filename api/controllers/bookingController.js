@@ -6,7 +6,7 @@ exports.getAllBookings = async (req, res, next) => {
         const role = req.user.role;
         const user_id = req.user.id;
 
-        let query = 'SELECT * FROM bookings b';
+        let query = 'SELECT b.* FROM bookings b';
         let params = [];
 
         if (role === 'customer') {
@@ -28,13 +28,20 @@ exports.getByIdBookings = async (req, res, next) => {
     try {
         const id = parseInt(req.params.id, 10);
         const [rows] = await db.query(
-            'SELECT * FROM bookings WHERE id = ?',
+            `SELECT b.*, r.owner_id FROM bookings b JOIN resources r ON b.resource_id = r.id WHERE b.id = ?`,
             [id]
         );
         if (rows.length === 0) {
             return res.status(404).json({message: 'Booking not found'});
         }
-        res.status(200).json(rows[0]);
+        const { owner_id, ...booking } = rows[0];
+        const isOwner = booking.user_id === req.user.id;
+        const isResourceProvider = req.user.role === 'provider' && owner_id === req.user.id;
+        const isAdmin = req.user.role === 'admin';
+        if (!isOwner && !isResourceProvider && !isAdmin) {
+            return res.status(403).json({message: 'Forbidden'});
+        }
+        res.status(200).json(booking);
 
     } catch (error) {
         next(error);
@@ -45,9 +52,7 @@ exports.postBookings = async (req, res, next) => {
 
     try {
         const { resource_id, specific_date, start_time, end_time } = req.body;
-        const user_id = (req.user.role === 'admin' && req.body.user_id) 
-            ? parseInt(req.body.user_id, 10) 
-            : req.user.id;
+        const user_id = req.user.id;
         const finalStatus = 'confirmed';
 
         await connection.beginTransaction();
@@ -64,8 +69,8 @@ exports.postBookings = async (req, res, next) => {
         }
 //Checkiing Available time
         const [availableTime] = await connection.query(
-            `SELECT id FROM availability WHERE resource_id = ?  AND specific_date = ? OR (specific_date is null day_of_week = DAYOFWEEK(?) - 1) AND start_time <= ?  AND end_time >= ?`,
-            [resource_id, specific_date ,specific_date, start_time, end_time]
+            `SELECT id FROM availability WHERE resource_id = ?  AND specific_date = ?  AND start_time <= ?  AND end_time >= ?`,
+            [resource_id, specific_date, start_time, end_time]
         );
 
         if (availableTime.length === 0) {
@@ -82,7 +87,7 @@ exports.postBookings = async (req, res, next) => {
             await connection.rollback();
             return res.status(409).json({ message: 'This time slot is already booked' });
         }
-//posting
+//Posting by insert Query 
         const [result] = await connection.query(
             `INSERT INTO bookings (resource_id, user_id, specific_date, start_time, end_time, status) 
              VALUES (?, ?, ?, ?, ?, ?)`,

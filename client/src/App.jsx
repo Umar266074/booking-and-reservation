@@ -6,6 +6,7 @@ import SignUp from "./pages/SignUp";
 import ResourceListPage from "./pages/ResourceListPage";
 import ResourceDetail from "./pages/ResourceDetail";
 import BookingLists from "./pages/BookingLists";
+import AdminUserRoleUpdate from "./pages/AdminUserRoleUpdate";
 
 export default function App() {
   return (
@@ -19,6 +20,10 @@ export default function App() {
         <Route path="/resources" element={<ProtectedRoute><ResourceListPage /></ProtectedRoute>} />
         <Route path="/resources/:id" element={<ProtectedRoute><ResourceDetail /></ProtectedRoute>} />
         <Route path="/bookings" element={<ProtectedRoute><BookingLists /></ProtectedRoute>} />
+        <Route
+          path="/admin/users"
+          element={<ProtectedRoute roles={["admin"]}><AdminUserRoleUpdate /></ProtectedRoute>}
+        />
       </Routes>
     </>
   );

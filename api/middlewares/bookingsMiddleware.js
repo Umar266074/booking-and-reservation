@@ -23,13 +23,17 @@ const bookingValidation = [
         .matches(TIME_REGEX).withMessage('start_time must be HH:mm or HH:mm:ss'),
 
     body('end_time')
-        .notEmpty().withMessage('End time is required')
-        .custom((value, { req }) => {
-            if (toSeconds(value) <= toSeconds(req.body.start_time)) {
-                throw new Error('end_time must be strictly after start_time');
-            }
-            return true;
-        }),
+    .notEmpty().withMessage('End time is required').bail()
+    .matches(TIME_REGEX).withMessage('end_time must be HH:mm or HH:mm:ss').bail()
+    .custom((value, { req }) => {
+        const start = req.body.start_time;
+        if (typeof start !== 'string' || !TIME_REGEX.test(start)) return true;
+
+        if (toSeconds(value) <= toSeconds(start)) {
+            throw new Error('end_time must be strictly after start_time');
+        }
+        return true;
+    }),
 
     body('status')
         .optional()

@@ -1,3 +1,4 @@
+// Register / login asli database ke saath (FR-1..FR-4, NFR-3).
 const request = require('supertest');
 const app = require('../server');
 const db = require('../config/db');
