@@ -1,6 +1,5 @@
 import api from "./apiClient";
 
-// params = { resource_id: 5 } -> GET /availability?resource_id=5
 export const getAvailabilityAPI = async (params) => {
   const response = await api.get("/availability", { params });
   return response.data;

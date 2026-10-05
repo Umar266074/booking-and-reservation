@@ -52,7 +52,7 @@ export default function ResourceDetail() {
   if (!selected) return null;
 
   const isActive = Boolean(selected.is_active);
-  const canEdit = canEditResource(selected);     // admin ya is resource ka owner provider
+  const canEdit = canEditResource(selected);   
 
   return (
     <div className="page">
@@ -81,7 +81,7 @@ export default function ResourceDetail() {
 
         <AvailabilitySlots
           slots={slots}
-          canBook={isActive}                 // customer, provider aur admin sab khud ke liye book kar sakte hain
+          canBook={isActive} 
           canManage={canEdit}
           onBook={(slot) => { setSuccess(""); setBookingSlot(slot); }}
           onDelete={handleDeleteSlot}

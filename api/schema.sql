@@ -1,6 +1,3 @@
--- Clean schema for the Booking & Reservation system (MySQL 8 / MariaDB 10).
--- Usage:  CREATE DATABASE booking_system;  USE booking_system;  SOURCE schema.sql;
--- Tests load this same file into the separate `booking_system_test` database.
 
 CREATE TABLE IF NOT EXISTS users (
   id            INT AUTO_INCREMENT PRIMARY KEY,
@@ -17,8 +14,8 @@ CREATE TABLE IF NOT EXISTS resources (
   name          VARCHAR(150) NOT NULL,
   description   VARCHAR(255),
   capacity      INT NOT NULL DEFAULT 1,
-  duration_minutes INT NOT NULL DEFAULT 30,          -- default slot length, minutes
-  is_active     BOOLEAN DEFAULT TRUE,             -- inactive = hidden from customers, not deleted
+  duration_minutes INT NOT NULL DEFAULT 30,          
+  is_active     BOOLEAN DEFAULT TRUE,             
   created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (owner_id) REFERENCES users(id)
 );
@@ -26,8 +23,8 @@ CREATE TABLE IF NOT EXISTS resources (
 CREATE TABLE IF NOT EXISTS availability (
   id            INT AUTO_INCREMENT PRIMARY KEY,
   resource_id   INT NOT NULL,
-  day_of_week   TINYINT NULL DEFAULT 0,           -- 0-6 (Sun-Sat), weekly window (not used by booking check yet)
-  specific_date DATE NULL,                        -- date-specific window (used by booking check)
+  day_of_week   TINYINT NULL DEFAULT 0,          
+  specific_date DATE NULL,                      
   start_time    TIME NOT NULL,
   end_time      TIME NOT NULL,
   FOREIGN KEY (resource_id) REFERENCES resources(id)

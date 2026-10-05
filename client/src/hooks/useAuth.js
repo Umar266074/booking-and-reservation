@@ -10,7 +10,7 @@ export default function useAuth() {
   const isAdmin = role === "admin";
   const isProvider = role === "provider";
 
-  // Backend ka rule: admin sab ka, provider sirf apne resource ka maalik hai.
+ 
   const canEditResource = (resource) =>
     isAdmin || (isProvider && resource?.owner_id === userId);
 
@@ -22,8 +22,8 @@ export default function useAuth() {
     isAdmin,
     isProvider,
     isCustomer: role === "customer",
-    canManageResources: isAdmin || isProvider,   // "Add Resource" jaise general actions ke liye
-    canEditResource,                              // kisi ek resource ko edit/deactivate karne ke liye
+    canManageResources: isAdmin || isProvider,   
+    canEditResource,                             
     logout,
   };
 }

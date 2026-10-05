@@ -20,7 +20,7 @@ export default function ResourceListPage() {
     try {
       await remove(id);
     } catch (err) {
-      alert(err);   // masalan: "You can only deactivate your own resource"
+      alert(err); 
     }
   };
 

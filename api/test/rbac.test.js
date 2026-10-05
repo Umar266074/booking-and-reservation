@@ -1,4 +1,3 @@
-// Roles table (Section 3): har endpoint par server-side enforcement.
 const request = require('supertest');
 const app = require('../server');
 const db = require('../config/db');
@@ -42,7 +41,7 @@ describe('resources: who can create / edit / delete', () => {
   });
 
   it('provider cannot edit or delete another provider\'s resource (403)', async () => {
-    // resource 3 belongs to provider2 (11)
+
     expect((await as('provider')(request(app).put('/api/resources/3')).send(body)).status).toBe(403);
     expect((await as('provider')(request(app).delete('/api/resources/3'))).status).toBe(403);
     const [[row]] = await db.query('SELECT name, is_active FROM resources WHERE id = 3');
@@ -113,11 +112,11 @@ describe('availability: who can define it', () => {
 });
 
 describe('bookings: who can see and cancel what', () => {
-  let b1, b2; // b1: customer on resource 1 (provider's), b2: customer2 on resource 5 (provider's too)
-  let bOther; // customer on resource 3 (provider2's)
+  let b1, b2; 
+  let bOther; 
 
   beforeAll(async () => {
-    await resetDatabase();      // pichle describe ne availability badli/delete ki thi: saaf seed se shuru
+    await resetDatabase();    
     b1 = (await makeBooking('customer', 1, '09:00', '10:00')).body;
     b2 = (await makeBooking('customer2', 5, '09:00', '10:00')).body;
     bOther = (await makeBooking('customer', 3, '09:00', '10:00')).body;
@@ -132,7 +131,7 @@ describe('bookings: who can see and cancel what', () => {
   it('provider sees bookings on their own resources, with the correct booking ids', async () => {
     const res = await as('provider')(request(app).get('/api/bookings'));
     expect(res.status).toBe(200);
-    expect(res.body.map((b) => b.id).sort()).toEqual([b1.id, b2.id].sort());   // not bOther (resource 3)
+    expect(res.body.map((b) => b.id).sort()).toEqual([b1.id, b2.id].sort());  
     expect(res.body.every((b) => b.status === 'confirmed' && b.specific_date)).toBe(true);
   });
 

@@ -1,4 +1,3 @@
-// Resources ka core CRUD + validation (FR-5, FR-6, FR-7, FR-19, FR-21).
 const request = require('supertest');
 const app = require('../server');
 const db = require('../config/db');

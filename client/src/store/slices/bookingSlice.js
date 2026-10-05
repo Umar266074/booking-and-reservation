@@ -122,7 +122,6 @@ const bookingSlice = createSlice({
       })
 // Delete Booking
       .addCase(deleteBookings.fulfilled, (state, action) => {
-        // cancel = status "cancelled" (row delete nahi hoti), isliye list mein cancelled badge ke sath rahe
         const item = state.items.find((b) => b.id === action.payload);
         if (item) item.status = "cancelled";
       })

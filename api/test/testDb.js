@@ -1,4 +1,4 @@
-// Test database ko har test file ke shuru mein saaf schema + seed data ke sath dobara banata hai.
+
 const fs = require('fs');
 const path = require('path');
 const mysql = require('mysql2/promise');
@@ -8,7 +8,7 @@ const DAY2 = '2030-01-16';
 
 async function resetDatabase() {
   const name = process.env.DB_NAME;
-  // Safety: real database par galti se ye script na chal jaye.
+
   if (!/^[A-Za-z0-9_]+_test$/.test(name)) {
     throw new Error(`Refusing to reset "${name}": test database ka naam _test par khatam hona chahiye`);
   }
@@ -38,7 +38,6 @@ async function resetDatabase() {
         (99, 'Adam',   'admin@test.com',     'x', 'admin')`
     );
 
-    // 5 active resources (NFR-6) + 1 inactive.  owners: provider(10) -> 1,2,5,6   provider2(11) -> 3,4
     await conn.query(
       `INSERT INTO resources (id, owner_id, name, description, capacity, duration_minutes, is_active) VALUES
         (1, 10, 'Room A', 'Big room',   4, 30, 1),
@@ -49,7 +48,6 @@ async function resetDatabase() {
         (6, 10, 'Old Room', NULL,       1, 30, 0)`
     );
 
-    // Har resource par DAY1 aur DAY2 ko 09:00-17:00 available.
     const rows = [];
     for (const rid of [1, 2, 3, 4, 5, 6]) {
       rows.push(`(${rid}, '${DAY1}', '09:00:00', '17:00:00')`);

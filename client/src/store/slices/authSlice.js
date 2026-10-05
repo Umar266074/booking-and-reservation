@@ -9,7 +9,7 @@ const authSlice = createSlice({
   initialState: {
     token: token || null,
     role: role || null,
-    userId: userId ? Number(userId) : null,   // resource.owner_id se match karne ke liye
+    userId: userId ? Number(userId) : null, 
   },
   reducers: {
     setCredentials: (state, action) => {

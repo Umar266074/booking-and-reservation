@@ -8,7 +8,6 @@ import {
   deleteAvailability,
 } from "../store/slices/availabilitySlice";
 
-// resourceId dene par sirf usi resource ki availability aati hai
 export default function useAvailability({ autoFetch = true, resourceId } = {}) {
   const dispatch = useDispatch();
   const { items, selected, loading, error } = useSelector(

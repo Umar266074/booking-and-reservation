@@ -27,7 +27,7 @@ export default function ResourceForm({ initial, onSubmit, submitLabel = "Save" }
         duration_minutes: Number(form.duration_minutes),
       });
     } catch (err) {
-      setError(err);   // thunk .unwrap() se error ka text aata hai
+      setError(err);
     }
   };
 
