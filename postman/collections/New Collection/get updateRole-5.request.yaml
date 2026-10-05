@@ -1,0 +1,10 @@
+$kind: http-request
+name: get updateRole/5
+description: ""
+url: http://localhost:5000/api/updateRole/5
+method: GET
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_0d42}}"
+order: 4502512783826331

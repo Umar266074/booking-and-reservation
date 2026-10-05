@@ -1,0 +1,4 @@
+Conflict Detection:
+	Every booking create and edit runs in one DB transaction:
+1.FOR UPDATE locks the resource row. Any other request for the same resource waits here.
+2.Check the requested window against availability. Otherwise 409 This time slot is not available.

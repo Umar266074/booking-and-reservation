@@ -1,0 +1,18 @@
+$kind: http-request
+description: ""
+url: http://localhost:5000/api/resources
+method: GET
+body:
+  type: json
+  content: "{\r
+
+    \  \"email\": \"ali@test.com\",\r
+
+    \  \"password\": \"password123\"\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_10c4}}"
+order: 2445229161288834

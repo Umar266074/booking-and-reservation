@@ -1,0 +1,8 @@
+$kind: http-request
+url: http://localhost:5000/api/resources/1
+method: DELETE
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_07nf}}"
+order: 4503516988478426

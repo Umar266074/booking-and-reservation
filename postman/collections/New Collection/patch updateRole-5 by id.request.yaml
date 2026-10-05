@@ -1,0 +1,13 @@
+$kind: http-request
+name: patch updateRole/5 by id
+description: ""
+url: http://localhost:5000/api/updateRole/5
+method: PATCH
+body:
+  type: json
+  content: "{\r\n  \"role\": \"provider\"\r\n}"
+auth:
+  type: bearer
+  credentials:
+    token: ""
+order: 4502598872578326

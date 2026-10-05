@@ -1,0 +1,1 @@
+open the terminal in the backend folder (api) and eun that cmd npm install.

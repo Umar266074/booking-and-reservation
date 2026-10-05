@@ -1,0 +1,22 @@
+$kind: http-request
+description: ""
+url: http://localhost:5000/api/bookings
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"resource_id\": 1,\r
+
+    \  \"specific_date\": \"2026-10-10\",\r
+
+    \  \"start_time\": \"02:00:00\",\r
+
+    \  \"end_time\": \"03:00:00\"\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: ""
+order: 4485422095873052

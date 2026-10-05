@@ -1,0 +1,24 @@
+$kind: http-request
+description: ""
+url: http://localhost:5000/api/resources
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"name\": \"Conference Room A\",\r
+
+    \  \"description\": \"Main office meeting room\",\r
+
+    \  \"capacity\": 10,\r
+
+    \  \"duration_minutes\": 60,\r
+
+    \  \"is_active\": true\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_1029}}"
+order: 4459846724303826

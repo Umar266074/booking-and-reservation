@@ -1,0 +1,8 @@
+$kind: http-request
+url: http://localhost:5000/api/availability/4
+method: GET
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_07nf}}"
+order: 4503066025903829

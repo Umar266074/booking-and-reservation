@@ -1,0 +1,23 @@
+$kind: http-request
+url: http://localhost:5000/api/resources
+method: GET
+body:
+  type: json
+  content: "{\r
+
+    \    \"resource_id\": 10,\r
+
+    \    \"day_of_week\": 0,\r
+
+    \    \"specific_date\": \"2026-10-31\",\r
+
+    \    \"start_time\": \"06:00:00\",\r
+
+    \    \"end_time\": \"16:00:00\"\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_07nf}}"
+order: 4503395994243676

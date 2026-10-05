@@ -1,0 +1,32 @@
+.btn { padding: 8px 14px; border: 0; border-radius: 6px; cursor: pointer; font: inherit; }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn-primary   { background: var(--accent); color: #fff; }
+.btn-secondary { background: var(--code-bg); color: var(--text-h); }
+.btn-danger    { background: #d93025; color: #fff; }
+
+.field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; text-align: left; }
+.field input { padding: 8px; border: 1px solid var(--border); border-radius: 6px; font: inherit; }
+.field-error { color: #d93025; font-size: 14px; }
+
+.card { border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: left; }
+.card-head { display: flex; justify-content: space-between; align-items: center; }
+.card-actions { display: flex; gap: 12px; align-items: center; margin-top: 12px; }
+.meta { font-size: 14px; }
+.badge { padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+.badge-on  { background: #e6f4ea; color: #137333; }
+.badge-off { background: #fce8e6; color: #c5221f; }
+
+.navbar { display: flex; justify-content: space-between; align-items: center; padding: 12px 24px; border-bottom: 1px solid var(--border); }
+.nav-links { display: flex; gap: 16px; align-items: center; }
+.role-tag { font-size: 12px; text-transform: uppercase; color: var(--text); }
+
+.auth-page { max-width: 360px; margin: 40px auto; text-align: left; }
+.page { max-width: 960px; margin: 24px auto; padding: 0 16px; text-align: left; }
+.page-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+.section { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+.slot-list { display: flex; flex-direction: column; gap: 8px; }
+.slot-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; }
+.slot-actions { display: flex; gap: 8px; }
+.success { background: #e6f4ea; color: #137333; padding: 10px 14px; border-radius: 8px; }
+.badge-neutral { background: var(--code-bg); color: var(--text-h); }

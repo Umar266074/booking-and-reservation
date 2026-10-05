@@ -1,0 +1,18 @@
+$kind: http-request
+description: ""
+url: http://localhost:5000/api/availability
+method: GET
+body:
+  type: json
+  content: "{\r
+
+    \  \"email\": \"ali@test.com\",\r
+
+    \  \"password\": \"password123\"\r
+
+    }\r\n"
+auth:
+  type: bearer
+  credentials:
+    token: ""
+order: 4475568092514104

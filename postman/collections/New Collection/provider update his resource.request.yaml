@@ -1,0 +1,23 @@
+$kind: http-request
+url: http://localhost:5000/api/resources/31
+method: PUT
+body:
+  type: json
+  content: "{\r
+
+    \  \"name\": \"Conference Room updated\",\r
+
+    \  \"description\": \"Main office meeting room\",\r
+
+    \  \"capacity\": 15,\r
+
+    \  \"duration_minutes\": 50,\r
+
+    \  \"is_active\": true\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_07nf}}"
+order: 4503599322890888
