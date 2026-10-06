@@ -27,7 +27,7 @@ export default function AvailabilityForm({ resourceId, onSubmit }) {
 
   return (
     <form onSubmit={handleSubmit} className="card">
-      <h3>Availability add karo</h3>
+      <h3>ADD Availability</h3>
       <Input label="Date" name="specific_date" type="date" min={todayStr()}
              value={form.specific_date} onChange={handleChange} required />
       <Input label="Start time" name="start_time" type="time" value={form.start_time} onChange={handleChange} required />

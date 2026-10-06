@@ -39,7 +39,7 @@ exports.postAvailability = async (req, res, next) => {
         const resource = resourceRows[0];
         if (req.user.role !== 'admin' && resource.owner_id !== req.user.id) {
             return res.status(403).json({
-                message: 'You can only add availability for your own resource'
+                message: 'You can only add availability of your own resource'
             });
         }
         const [result] = await db.query(

@@ -3,13 +3,13 @@ import useUsers from "../hooks/useUser";
 import useAuth from "../hooks/useAuth";
 import Button from "../components/Button";
 
-const ROLES = ["customer", "provider", "admin"];
+const ROLES = ["customer", "provider"];
 
 export default function AdminUserRoleUpdate() {
   const { users, loading, error, changeRole } = useUsers();
   const { userId } = useAuth();
 
-  const [chosen, setChosen] = useState({});          // { [userId]: naya role } sirf badli hui rows ke liye
+  const [chosen, setChosen] = useState({});
   const [savingId, setSavingId] = useState(null);
   const [message, setMessage] = useState({ type: "", text: "" });
 
@@ -26,7 +26,7 @@ export default function AdminUserRoleUpdate() {
         delete next[user.id];
         return next;
       });
-      setMessage({ type: "success", text: `${user.name} ab ${roleOf(user)} hai.` });
+      setMessage({ type: "success", text: `${user.name} is ${roleOf(user)} now.` });
     } catch (err) {
       setMessage({ type: "error", text: String(err) });
     } finally {
@@ -40,7 +40,7 @@ export default function AdminUserRoleUpdate() {
         <h2>Users</h2>
       </div>
       <p className="meta">
-        Role badalne ke baad us user ko dobara login karna hoga, tab naya role uske token mein aayega.
+        User have to login again after changing the role.
       </p>
 
       {message.text && (
@@ -63,13 +63,13 @@ export default function AdminUserRoleUpdate() {
             const isMe = user.id === userId;
             return (
               <tr key={user.id}>
-                <td>{user.name}{isMe && " (aap)"}</td>
+                <td>{user.name}{isMe && " (you)"}</td>
                 <td>{user.email}</td>
                 <td>
                   <select
                     value={roleOf(user)}
                     onChange={(e) => setChosen({ ...chosen, [user.id]: e.target.value })}
-                    disabled={isMe}                      // admin apna role galti se na hata de
+                    disabled={isMe}
                     aria-label={`Role of ${user.name}`}
                   >
                     {ROLES.map((r) => (

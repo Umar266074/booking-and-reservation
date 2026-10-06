@@ -6,6 +6,8 @@ import { setCredentials } from "../store/slices/authSlice";
 import getError from "../utils/getErrors";
 import Input from "../components/Input";
 import Button from "../components/Button";
+import ButtonSubmit from "../components/ButtonSubmit";
+
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -16,6 +18,26 @@ export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  addEventListener("submit", (e)=>{
+    e.preventDefault();
+     setError("");
+    if (!email) {
+    setError("Email is required");
+    return;
+  }
+
+  if (!email.includes("@")) {
+    setError("Enter a valid email");
+    return;
+  }
+
+  if (!password) {
+    setError("Password is required");
+    return;
+  }
+
+  })
+      
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -35,16 +57,17 @@ export default function Login() {
     <div className="auth-page">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
+        
         <Input label="Email" name="email" type="email" value={email}
                onChange={(e) => setEmail(e.target.value)} required />
         <Input label="Password" name="password" type="password" value={password}
                onChange={(e) => setPassword(e.target.value)} required />
         {error && <p className="field-error">{error}</p>}
-        <Button type="submit" disabled={loading}>
+        <ButtonSubmit type="submit" disabled={loading}>
           {loading ? "Logging in..." : "Login"}
-        </Button>
+        </ButtonSubmit>
       </form>
-      <p>Account nahi hai? <Link to="/signup">Sign Up</Link></p>
+      <p>If there is no Account? <Link to="/signup">Sign Up</Link></p>
     </div>
   );
 }

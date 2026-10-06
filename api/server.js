@@ -7,8 +7,8 @@ const updateRoleRoutes = require('./routes/updateRoleRoutes');
 const resourcesRoute = require('./routes/resourcesRoutes');
 const bookingRoutes = require('./routes/bookingRoutes');
 const availabilityRoutes = require('./routes/availabilityRoutes');
-
-const allowedOrigin = process.env.CLIENT_ORIGIN || 'http://localhost:5173';
+// process.env.CLIENT_ORIGIN || 
+const allowedOrigin = 'http://localhost:5173';
 const corsOptions = {
   origin: allowedOrigin,
   methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],

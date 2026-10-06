@@ -40,7 +40,7 @@ export default function SignUp() {
           {loading ? "Creating..." : "Create account"}
         </Button>
       </form>
-      <p>Pehle se account hai? <Link to="/login">Login</Link></p>
+      <p>If you have existing account? <Link to="/login">Login</Link></p>
     </div>
   );
 }

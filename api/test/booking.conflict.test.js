@@ -21,7 +21,7 @@ describe('creating a booking', () => {
     expect(res.body).toMatchObject({ resource_id: 1, user_id: 1, status: 'confirmed' });
   });
 
-  it('takes user_id from the token, never from the body (FR-14)', async () => {
+  it('takes user_id from the token, never from the body', async () => {
     const res = await book('customer', { start: '09:00', end: '10:00', user_id: 99 });
     expect(res.status).toBe(201);
     expect(res.body.user_id).toBe(1);

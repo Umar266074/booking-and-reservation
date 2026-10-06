@@ -35,11 +35,11 @@ export default function ResourceDetail() {
   const handleBook = async (data) => {
     await createBooking(data);
     setBookingSlot(null);
-    setSuccess("Booking confirm ho gayi!");
+    setSuccess("Booking has been confirmed!");
   };
 
   const handleDeleteSlot = async (slotId) => {
-    if (!window.confirm("Cance this Availability?")) return;
+    if (!window.confirm("Cancel this Availability?")) return;
     try {
       await removeSlot(slotId);
     } catch (err) {

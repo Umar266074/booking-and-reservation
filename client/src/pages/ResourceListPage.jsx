@@ -39,7 +39,7 @@ export default function ResourceListPage() {
 
       {loading && <p>Loading...</p>}
       {error && <p className="field-error">{error}</p>}
-      {!loading && items.length === 0 && <p>Koi resource nahi mila.</p>}
+      {!loading && items.length === 0 && <p>Resources not Found.</p>}
 
       <div className="grid">
         {items.map((r) => (

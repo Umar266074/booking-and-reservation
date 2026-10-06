@@ -30,7 +30,7 @@ const bookingValidation = [
         if (typeof start !== 'string' || !TIME_REGEX.test(start)) return true;
 
         if (toSeconds(value) <= toSeconds(start)) {
-            throw new Error('end_time must be strictly after start_time');
+            throw new Error('End time must be strictly after Start time of the before Booking');
         }
         return true;
     }),
